@@ -5,33 +5,35 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Objects")]
     private CharacterController characterController;
-    public Vector2 input;
-    public Vector3 direction;
-    public float speed;
+    private Camera camera;
+
+    [Header("Movement")]
+    private Vector2 input;
+    private Vector3 direction;
+    [SerializeField] private float speed;
+    [SerializeField] private float rotationSpeed;
+    
     public void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        camera = Camera.main;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
+
+        ApplyRotation();
         ApplyMovement();
     }
-    public void ApplyMovement()
+    public void ApplyMovement() => characterController.Move(direction * speed * Time.deltaTime);
+
+    public void ApplyRotation()
     {
+        direction = Quaternion.Euler(0.0f, camera.transform.eulerAngles.y, 0.0f) * new Vector3(input.x, 0.0f, input.y);
+        var targetRotation = Quaternion.LookRotation(direction, Vector3.up);
 
-       // var targetSpeed = isSpriting && sprintSlider.value > 0f ? speed * sprintMultiplier : speed;
-        //currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.deltaTime);
-        characterController.Move(direction * speed * Time.deltaTime);
-       
-
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
     public void Move(InputAction.CallbackContext context)

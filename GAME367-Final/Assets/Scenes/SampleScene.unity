@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -395,12 +396,28 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.62, z: 0.4}
+  m_LocalPosition: {x: 0, y: 0.929, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1880272114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64724f7d3c619694d9d9e06c215ca9d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivityX: 5
+  sensitivityY: 5
+  cameraAngleMax: 80
+  cameraAngleMin: -80
 --- !u!1 &1880272110
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,9 +541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee99a6c0ac8f7844b87cd4f4a990c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {x: 0, y: 0}
-  direction: {x: 0, y: 0, z: 0}
   speed: 5
+  rotationSpeed: 1
 --- !u!143 &1880272116
 CharacterController:
   m_ObjectHideFlags: 0
@@ -594,6 +610,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 175f32b1-7f86-471d-a174-18ace95a7b47
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/a,/Keyboard/s,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 963194229}
+        m_TargetAssemblyTypeName: MouseLook, Assembly-CSharp
+        m_MethodName: Look
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9a78327e-fa48-4fde-bad5-b77bb14224b0
+    m_ActionName: Player/MouseX[/Mouse/delta/x]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
