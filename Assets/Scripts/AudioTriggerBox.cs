@@ -7,6 +7,7 @@ public class AudioTriggerBox : MonoBehaviour
     public bool hasPlayed = false;
     public IntercomController intercom;
     public AudioClip voiceLine;
+    public GameObject gate;
     // Start is called before the first frame update
     void Awake()
     {
@@ -16,6 +17,7 @@ public class AudioTriggerBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         
     }
 
@@ -25,7 +27,8 @@ public class AudioTriggerBox : MonoBehaviour
         print("entered");
         if (!other.GetComponent<PlayerMovement>()) return;
 
-        intercom.UpdateIntercom(voiceLine);
+        //if(gate != null)
+        intercom.UpdateIntercom(voiceLine, this);
         hasPlayed = true;
     }
 }
