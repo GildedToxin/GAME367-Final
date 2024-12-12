@@ -14,11 +14,15 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 direction;
     [SerializeField] private float speed;
     [SerializeField] private float rotationSpeed;
+
+    public Button button;
+    public IntercomController intercom;
     
     public void Awake()
     {
         characterController = GetComponent<CharacterController>();
         camera = Camera.main;
+        intercom = FindAnyObjectByType<IntercomController>();
     }
     void Update()
     {
@@ -42,4 +46,14 @@ public class PlayerMovement : MonoBehaviour
         direction = new Vector3(input.x, 0.0f, input.y);
     }
 
+    public void Select(InputAction.CallbackContext context)
+    {
+        if (button == null) return;
+        if (context.performed)
+        {
+            if (button.box.hasPlayed) return;
+            intercom.UpdateIntercom(button.clip, button.box);
+            button.box.hasPlayed = true;
+        }
+    }
 }

@@ -23,6 +23,7 @@ public class AudioTriggerBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (voiceLine == null) return;
         if (hasPlayed) return;
         print("entered");
         if (!other.GetComponent<PlayerMovement>()) return;
